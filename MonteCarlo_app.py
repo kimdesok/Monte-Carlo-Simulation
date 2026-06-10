@@ -15,7 +15,8 @@ st.set_page_config(
 # --- APP TITLE & DESCRIPTION ---
 st.title("📊 득표수 동일 투표구 찾기 시뮬레이터")
 st.markdown("""
-**몬테칼로 기법**과 **푸와송 분포 트래킹**을 활용 동일한 후보별 득표수를 보이는 투표소 갯수를 파악하는 시뮬레이션임. 적용된 변수는 정치적 균질성과 특정 후보의 지지정도임.
+**몬테카를로 기법**과 **포와송 분포 트래킹**을 활용 동일한 득표수를 보이는 투표소 갯수를 짐작해보는 시뮬레이션임. 
+적용된 변수는 정치적 균질성과 특정 후보의 지지정도이며, 주어진 초기값으로 앱을 실행해보면 (Run =100)일 경우 10곳 남짓 나옴.
 """)
 st.markdown("---")
 
@@ -139,7 +140,7 @@ if st.sidebar.button(f"🚀 Run {n_simulations} 가상 투표", type="primary"):
     
     col1, col2, col3 = st.columns(3)
     with col1:
-        st.metric(label="동일 결과 투표구 수", value=f"{mean_matches:.2f} places")
+        st.metric(label="동일 결과 투표구 수", value=f"{mean_matches:.1f} places")
     with col2:
         st.metric(label="최대 투표구 수", value=f"{int(max_matches)} places")
     with col3:
@@ -148,8 +149,8 @@ if st.sidebar.button(f"🚀 Run {n_simulations} 가상 투표", type="primary"):
     st.markdown("---")
     
     # --- ADDED SECTION: HISTOGRAM VISUALIZATION ---
-    st.subheader("📊 분포 히스토그램: 2026년 6월 3일 선거일 실제 동일 득표 광주전남 투표구(10) 기준")
-    st.markdown("전 시뮬레이션에 걸쳐 특정한 동일 투표수를 보이는 투표구가 얼마나 자주 발생하는 지를 보여주는 챠트")
+    st.subheader("📊 분포 히스토그램: 2026년 6월 3일 선거일 당시 동일 득표 광주전남 투표구 실제 수(10) 기준")
+    st.markdown("전체 시뮬레이션에 걸쳐 특정한 동일 투표수를 보이는 투표구가 얼마나 자주 발생하는 지를 보여주는 챠트")
     
     # Create the Plot
     fig, ax = plt.subplots(figsize=(10, 4))
