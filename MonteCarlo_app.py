@@ -187,16 +187,13 @@ if st.sidebar.button(f"🚀 Run {n_simulations} 가상 투표", type="primary"):
     
     st.info(f"""
     **통계 요약:** 주어진 상황에서, 동일 득표가 나올 수학적 기대치 ($\lambda$)는 **{mean_matches:.2f}** 였음. 이는 1회 선거당 투표소의 기대치를 나타냄.  우연으로 인해 **10** 곳 이하로 기대치가 나올 확률은 **{prob_12_or_less:.1f}%**이었음.  
-    
     히스토그램에서 보듯이 아래 위로 그은 빨간색 직선 (X축 10에 위치)이 히스토그램의 피크 가까이 위치하는 것 보았을 때 시물레이션이 정상적으로 기대할 수 있는 수치임을 알 수 있음.
     """)
     
     # --- RAW DATA VIEW FOR ABSOLUTE TRANSPARENCY ---
     st.markdown("---")
     st.subheader("📂 검증을 위한 실제 시뮬레이션 데이터 (Last Run Sample)")
-    st.markdown("아래 스프레드시트는 **우연하게** 발생한 동일 투표수를 가진 투표구 시뮬레이션 결과 중 첫번째 수해 결과를 보여줌.  
-    후보별 동일 득표수를 보이는 투표소 자료를 파랑색으로 하일라이트했으며 후보 1 투표수와 후보 2 투표수가 
-    동일하게 서로 다른 투표소에서 자연적으로 발생할 수 있는 예를 명확히 보여줌. 이상 끝!")
+    st.markdown("아래 스프레드시트는 **우연하게** 발생한 동일 투표수를 가진 투표구 시뮬레이션 결과 중 첫번째 수해 결과를 보여줌. 후보별 동일 득표수를 보이는 투표소 자료를 파랑색으로 하일라이트했으며 후보 1 투표수와 후보 2 투표수가 동일하게 서로 다른 투표소에서 자연적으로 발생할 수 있는 예를 명확히 보여줌. 이상 끝!")
 
     # Function to color code the rows that are perfectly matched
     def highlight_matches(row):
