@@ -13,10 +13,9 @@ st.set_page_config(
 )
 
 # --- APP TITLE & DESCRIPTION ---
-st.title("📊 동일 득표수 투표구 수 찾기 시뮬레이터")
+st.title("📊 득표수 동일 투표구 찾기 시뮬레이터")
 st.markdown("""
-**몬테카를로 기법**과 **포와송 분포 트래킹**을 활용 동일한 득표수를 보이는 투표소 갯수를 짐작해보는 시뮬레이션임. 
-적용된 변수는 정치적 균질성과 특정 후보의 지지정도이며, 주어진 초기값으로 앱을 실행해보면 (Run =100)일 경우 10곳 남짓 나옴.
+**몬테칼로 기법**과 **푸와송 분포 트래킹**을 활용 동일한 후보별 득표수를 보이는 투표소 갯수를 파악하는 시뮬레이션임. 적용된 변수는 정치적 균질성과 특정 후보의 지지정도임.
 """)
 st.markdown("---")
 
@@ -26,13 +25,13 @@ st.sidebar.markdown("지역 투표자의 특성에 따라 조정 필요함")
 
 n_precincts = st.sidebar.slider(
     "투표소 갯수 (N)", 
-    min_value=300, max_value=1200, value=1050, step=50,
+    min_value=300, max_value=5000, value=1050, step=100,
     help="선거구내 비교 대상인 전체 투표소 갯수."
 )
 
 avg_voters = st.sidebar.slider(
     "투표소당 투표수", 
-    min_value=500, max_value=5000, value=900, step=100,
+    min_value=100, max_value=5000, value=900, step=100,
     help="각 투표소당 투표자수"
 )
 
@@ -140,7 +139,7 @@ if st.sidebar.button(f"🚀 Run {n_simulations} 가상 투표", type="primary"):
     
     col1, col2, col3 = st.columns(3)
     with col1:
-        st.metric(label="동일 결과 투표구 수", value=f"{mean_matches:.1f} places")
+        st.metric(label="동일 결과 투표구 수", value=f"{mean_matches:.2f} places")
     with col2:
         st.metric(label="최대 투표구 수", value=f"{int(max_matches)} places")
     with col3:
@@ -149,8 +148,8 @@ if st.sidebar.button(f"🚀 Run {n_simulations} 가상 투표", type="primary"):
     st.markdown("---")
     
     # --- ADDED SECTION: HISTOGRAM VISUALIZATION ---
-    st.subheader("📊 분포 히스토그램: 2026년 6월 3일 선거일 당시 동일 득표 광주전남 투표구 실제 수(10) 기준")
-    st.markdown("전체 시뮬레이션에 걸쳐 특정한 동일 투표수를 보이는 투표구가 얼마나 자주 발생하는 지를 보여주는 챠트")
+    st.subheader("📊 분포 히스토그램: 2026년 6월 3일 선거일 실제 동일 득표 광주전남 투표구(10) 기준")
+    st.markdown("전 시뮬레이션에 걸쳐 특정한 동일 투표수를 보이는 투표구가 얼마나 자주 발생하는 지를 보여주는 챠트")
     
     # Create the Plot
     fig, ax = plt.subplots(figsize=(10, 4))
@@ -187,13 +186,14 @@ if st.sidebar.button(f"🚀 Run {n_simulations} 가상 투표", type="primary"):
     
     st.info(f"""
     **통계 요약:** 주어진 상황에서, 동일 득표가 나올 수학적 기대치 ($\lambda$)는 **{mean_matches:.2f}** 였음. 이는 1회 선거당 투표소의 기대치를 나타냄.  우연으로 인해 **10** 곳 이하로 기대치가 나올 확률은 **{prob_12_or_less:.1f}%**이었음.  
+    
     히스토그램에서 보듯이 아래 위로 그은 빨간색 직선 (X축 10에 위치)이 히스토그램의 피크 가까이 위치하는 것 보았을 때 시물레이션이 정상적으로 기대할 수 있는 수치임을 알 수 있음.
     """)
     
     # --- RAW DATA VIEW FOR ABSOLUTE TRANSPARENCY ---
     st.markdown("---")
     st.subheader("📂 검증을 위한 실제 시뮬레이션 데이터 (Last Run Sample)")
-    st.markdown("아래 스프레드시트는 **우연하게** 발생한 동일 투표수를 가진 투표구 시뮬레이션 결과 중 첫번째 수해 결과를 보여줌. 후보별 동일 득표수를 보이는 투표소 자료를 파랑색으로 하일라이트했으며 후보 1 투표수와 후보 2 투표수가 동일하게 서로 다른 투표소에서 자연적으로 발생할 수 있는 예를 명확히 보여줌. 이상 끝!")
+    st.markdown("아래 스프레드시트를 보면 어떻게 **우연하게** 동일 투표수를 보이는 투표구가 발생하는 지 확인 가능함. 후보별 동일 득표수를 보이는 투표소 자료를 파랑색으로 하일라이트함.")
 
     # Function to color code the rows that are perfectly matched
     def highlight_matches(row):
