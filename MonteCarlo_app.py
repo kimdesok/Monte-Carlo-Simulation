@@ -42,8 +42,8 @@ avg_support = st.sidebar.slider(
 ) / 100.0
 
 support_std = st.sidebar.slider(
-    "정치성향 다양성 (1-50)", 
-    min_value=1.0, max_value=50.0, value=9.0, step=1,
+    "정치성향 다양성 (1-30)", 
+    min_value=1, max_value=30, value=10, step=1,
     help="동네간 정치적 균질성(개인간으로 해석해도 무방). 0.5는 개인간 매우 다름. 10.0은 거의 동일함."
 ) / 100.0
 
