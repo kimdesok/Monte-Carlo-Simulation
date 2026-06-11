@@ -37,7 +37,7 @@ avg_voters = st.sidebar.slider(
 
 avg_support = st.sidebar.slider(
     "일등후보 지지율", 
-    min_value=30.0, max_value=100.0, value=90.50, step=0.25,
+    min_value=30.0, max_value=100.0, value=90.50, step=0.5,
     help="앞서가는 후보에 대한 지지율."
 ) / 100.0
 
